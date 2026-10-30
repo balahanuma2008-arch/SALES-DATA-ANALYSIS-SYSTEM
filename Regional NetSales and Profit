@@ -1,0 +1,16 @@
+# Figure 6.7: Regional NetSales and Profit
+
+regional_performance = df.groupby("Region")[["NetSales", "Profit"]].sum()
+
+ax = regional_performance.plot(
+    kind="barh",
+    title="Regional NetSales and Profit"
+)
+
+ax.set_xlabel("Amount (dataset units)")
+ax.set_ylabel("Region")
+
+plt.tight_layout()
+plt.savefig(OUT / "figure_6_7_regional_sales_profit.png", dpi=180)
+plt.show()
+plt.close()
