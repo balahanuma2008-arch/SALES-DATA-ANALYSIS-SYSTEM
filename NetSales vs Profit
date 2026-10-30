@@ -1,0 +1,16 @@
+# Figure 6.6: NetSales vs Profit
+
+ax = df.plot(
+    kind="scatter",
+    x="NetSales",
+    y="Profit",
+    title="NetSales vs Profit"
+)
+
+ax.set_xlabel("NetSales (dataset units)")
+ax.set_ylabel("Profit (dataset units)")
+
+plt.tight_layout()
+plt.savefig(OUT / "figure_6_6_net_sales_vs_profit.png", dpi=180)
+plt.show()
+plt.close()
