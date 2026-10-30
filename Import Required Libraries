@@ -1,0 +1,11 @@
+# Step 1: Import Required Libraries
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from pathlib import Path
+from IPython.display import display
+
+# Set the default size of visualizations
+plt.rcParams["figure.figsize"] = (10, 6)
+
+print("All required libraries imported successfully.")
