@@ -1,0 +1,37 @@
+
+# Step 3: Validate Fields and Data Quality
+
+raw["OrderDate"] = pd.to_datetime(raw["OrderDate"], errors="coerce")
+
+text_cols = [
+    "Region", "Country", "SalesChannel", "ProductCategory",
+    "ProductName", "CustomerSegment", "OrderStatus",
+    "PaymentMethod", "SalesRep"
+]
+
+for col in text_cols:
+    raw[col] = raw[col].astype("string").str.strip()
+
+print("Year/date mismatches:", int((raw["OrderDate"].dt.year != raw["Year"]).sum()))
+
+quarter_from_date = raw["OrderDate"].dt.quarter.astype("Int64").astype("string")
+quarter_in_data = raw["Quarter"].astype("string").str.replace("Q", "", regex=False)
+
+print("Quarter/date mismatches:", int((quarter_from_date != quarter_in_data).sum()))
+print("Invalid quantity:", int((raw["Quantity"] <= 0).sum()))
+print("Invalid unit price:", int((raw["UnitPrice"] <= 0).sum()))
+
+print(
+    "GrossSales formula mismatches:",
+    int((raw["GrossSales"] - raw["UnitPrice"] * raw["Quantity"]).abs().gt(0.02).sum())
+)
+
+print(
+    "Discount formula mismatches:",
+    int((raw["DiscountAmount"] - raw["GrossSales"] * raw["DiscountPct"]).abs().gt(0.02).sum())
+)
+
+print(
+    "NetSales formula mismatches:",
+    int((raw["NetSales"] - (raw["GrossSales"] - raw["DiscountAmount"])).abs().gt(0.02).sum())
+)
