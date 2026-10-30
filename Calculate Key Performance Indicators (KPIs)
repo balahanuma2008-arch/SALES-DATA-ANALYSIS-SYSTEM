@@ -1,0 +1,39 @@
+
+# Step 5: Calculate Key Performance Indicators (KPIs)
+
+total_gross_sales = df["GrossSales"].sum()
+total_discount = df["DiscountAmount"].sum()
+total_net_sales = df["NetSales"].sum()
+total_cogs = df["COGS"].sum()
+total_profit = df["Profit"].sum()
+
+profit_margin = (
+    total_profit / total_net_sales * 100
+) if total_net_sales != 0 else 0
+
+average_order_value = (
+    total_net_sales / df["OrderID"].nunique()
+) if df["OrderID"].nunique() else 0
+
+category_sales = df.groupby("ProductCategory")["NetSales"].sum().sort_values(ascending=False)
+region_sales = df.groupby("Region")["NetSales"].sum().sort_values(ascending=False)
+channel_sales = df.groupby("SalesChannel")["NetSales"].sum().sort_values(ascending=False)
+
+print("Source transactions:", len(raw))
+print("Cancelled transactions excluded:", int(raw["OrderStatus"].eq("Cancelled").sum()))
+print("Analysed transactions:", len(df))
+print("Period covered:", f'{df["Year"].min()}–{df["Year"].max()}')
+
+print("Gross sales:", round(total_gross_sales, 2))
+print("Discount amount:", round(total_discount, 2))
+print("Net sales / revenue:", round(total_net_sales, 2))
+print("COGS:", round(total_cogs, 2))
+print("Net profit:", round(total_profit, 2))
+print("Profit margin (%):", round(profit_margin, 2))
+print("Average order value:", round(average_order_value, 2))
+
+print("Top category by NetSales:", category_sales.idxmax(), round(category_sales.max(), 2))
+print("Top region by NetSales:", region_sales.idxmax(), round(region_sales.max(), 2))
+print("Top channel by NetSales:", channel_sales.idxmax(), round(channel_sales.max(), 2))
+
+print("Non-cancelled records with negative profit:", int((df["Profit"] < 0).sum()))
