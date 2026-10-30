@@ -1,0 +1,12 @@
+print("=" * 55)
+print("SALES DATA ANALYSIS SYSTEM — FINAL SUMMARY")
+print("=" * 55)
+
+print(f"Total NetSales: {total_net_sales:,.2f}")
+print(f"Total Profit: {total_profit:,.2f}")
+print(f"Profit Margin: {profit_margin:.2f}%")
+print(f"Top Category: {category_sales.idxmax()} ({category_sales.max():,.2f})")
+print(f"Top Region: {region_sales.idxmax()} ({region_sales.max():,.2f})")
+print(f"Top Sales Channel: {channel_sales.idxmax()} ({channel_sales.max():,.2f})")
+
+print("Charts saved to:", OUT.resolve())
