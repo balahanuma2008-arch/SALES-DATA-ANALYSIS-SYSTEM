@@ -1,0 +1,17 @@
+# Figure 6.5: Yearly NetSales Trend
+
+yearly_sales = df.groupby("Year")["NetSales"].sum().sort_index()
+
+ax = yearly_sales.plot(
+    kind="line",
+    marker="o",
+    title="Yearly NetSales Trend"
+)
+
+ax.set_xlabel("Year")
+ax.set_ylabel("NetSales (dataset units)")
+
+plt.tight_layout()
+plt.savefig(OUT / "figure_6_5_yearly_net_sales_trend.png", dpi=180)
+plt.show()
+plt.close()
