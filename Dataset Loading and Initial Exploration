@@ -1,0 +1,18 @@
+from google.colab import files
+
+uploaded = files.upload()
+FILE = next(iter(uploaded))
+
+OUT = Path("sales_analysis_outputs")
+OUT.mkdir(exist_ok=True)
+
+raw = pd.read_csv(FILE)
+
+print("Source shape:", raw.shape)  # Expected: (24000, 25)
+print("First six records:")
+display(raw.head(6))
+raw.info()
+
+print("Missing cells:", int(raw.isna().sum().sum()))
+print("Exact duplicate rows:", int(raw.duplicated().sum()))
+print("Duplicate OrderID:", int(raw["OrderID"].duplicated().sum()))
