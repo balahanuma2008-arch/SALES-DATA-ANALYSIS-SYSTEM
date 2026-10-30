@@ -1,0 +1,15 @@
+
+# Figure 6.1: NetSales by Product Category
+
+ax = category_sales.plot(
+    kind="bar",
+    title="NetSales by Product Category"
+)
+
+ax.set_xlabel("Product category")
+ax.set_ylabel("NetSales (dataset units)")
+
+plt.tight_layout()
+plt.savefig(OUT / "figure_6_1_category_net_sales.png", dpi=180)
+plt.show()
+plt.close()
