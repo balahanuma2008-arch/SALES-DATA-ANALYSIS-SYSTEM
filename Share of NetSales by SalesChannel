@@ -1,0 +1,13 @@
+# Figure 6.2: Share of NetSales by SalesChannel
+
+df.groupby("SalesChannel")["NetSales"].sum().plot(
+    kind="pie",
+    autopct="%1.1f%%",
+    title="Share of NetSales by SalesChannel",
+    ylabel=""
+)
+
+plt.tight_layout()
+plt.savefig(OUT / "figure_6_2_channel_share.png", dpi=180)
+plt.show()
+plt.close()
