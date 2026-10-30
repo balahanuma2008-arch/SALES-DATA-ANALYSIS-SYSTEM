@@ -1,0 +1,16 @@
+# Groupby - region-wise sales
+region_sales_example = df.groupby("Region")["NetSales"].sum()
+
+# Groupby - product-wise sales
+product_sales_example = df.groupby("ProductCategory")["NetSales"].sum()
+
+# Aggregation - total gross sales and average net sales
+total_sales = df["GrossSales"].sum()
+average_sales = df["NetSales"].mean()
+
+# Groupby + aggregation together
+summary = df.groupby("Region")["NetSales"].agg(["sum", "mean"])
+
+print("Total GrossSales:", round(total_sales, 2))
+print("Average NetSales per record:", round(average_sales, 2))
+display(summary)
