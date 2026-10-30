@@ -1,0 +1,15 @@
+# Figure 6.4: Profit by Customer Segment
+
+df.boxplot(
+    column="Profit",
+    by="CustomerSegment"
+)
+
+plt.title("Profit by Customer Segment")
+plt.suptitle("")
+plt.xlabel("Customer Segment")
+plt.ylabel("Profit (dataset units)")
+plt.tight_layout()
+plt.savefig(OUT / "figure_6_4_profit_by_segment.png", dpi=180)
+plt.show()
+plt.close()
