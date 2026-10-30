@@ -1,0 +1,29 @@
+
+# Step 4: Exclude Cancelled Orders and Prepare Analysis Fields
+
+df = raw.loc[raw["OrderStatus"].ne("Cancelled")].copy()
+
+print("Cancelled rows excluded:", int(raw["OrderStatus"].eq("Cancelled").sum()))
+print("Rows included in analysis:", len(df))
+
+print(
+    "Profit formula mismatches in analysed rows:",
+    int((df["Profit"] - (df["NetSales"] - df["COGS"])).abs().gt(0.02).sum())
+)
+
+df["Year"] = df["OrderDate"].dt.year
+df["Quarter"] = "Q" + df["OrderDate"].dt.quarter.astype("Int64").astype("string")
+df["Month"] = df["OrderDate"].dt.month
+
+df["ProfitMarginPct"] = (
+    df["Profit"] / df["NetSales"] * 100
+).where(df["NetSales"] != 0)
+
+display(pd.DataFrame({
+    "Check": ["Source rows", "Cancelled rows excluded", "Rows analysed"],
+    "Result": [
+        len(raw),
+        int(raw["OrderStatus"].eq("Cancelled").sum()),
+        len(df)
+    ]
+}))
