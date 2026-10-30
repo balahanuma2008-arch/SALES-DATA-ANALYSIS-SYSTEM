@@ -1,0 +1,14 @@
+# Figure 6.3: Profit distribution per non-cancelled order
+
+df["Profit"].plot(
+    kind="hist",
+    bins=35,
+    title="Distribution of Profit per Non-Cancelled Order"
+)
+
+plt.xlabel("Profit (dataset units)")
+plt.ylabel("Number of orders")
+plt.tight_layout()
+plt.savefig(OUT / "figure_6_3_profit_histogram.png", dpi=180)
+plt.show()
+plt.close()
